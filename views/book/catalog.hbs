@@ -1,28 +1,21 @@
+<main>
+
+    <section id="all-listings">
+        <h1>Apartments for recents</h1>
+        <!-- If there are offers for housing in the database display each of them -->
 
 
-        <main>
+        {{#if housings }}
 
-            <section id="all-ads-page">
-                <article class="all-ads-title">
-                    <h1>All ads</h1>
-                </article>
+        {{#each housings}}
+        {{>hoising}}
+        {{/each}}
 
-                <!--If there are job ads in the database, show each one-->
-                {{#if jobs }}
-
-                {{#each jobs}}
-                {{>ad}}
-                {{/each}}
-    
-                {{else}}
-
-                <!--If there are still no job ads in the database display:-->
-                <article class="not-available-ads">
-                    <h1>No ads created yet.</h1>
-                    <h2>Join and find your perfect workers.</h2>
-                </article>
-                {{/if}}
-            </section>
-        </main>
-
- 
+        {{else}}
+        <!-- If there are still no offers for housing in the database display: -->
+        <div class="no-data-listing">
+            <p class="no-offer">There are no housing offers found...</p>
+        </div>
+        {{/if}}
+    </section>
+</main>

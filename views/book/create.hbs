@@ -1,34 +1,52 @@
 
         <main>
-
             <section id="create-page">
+                <div class="create-container">
+                    <div class="box-image"></div>
 
-                <article class="create-page-container">
-                    <form  method="POST" class="create-page-form">
-                        <h2>Create an ad</h2>
+                    <h2 class="box-heading"> Add new home</h2>
 
-                        <label for="headline">Headline:</label>
-                        <input type="text" id="headline" placeholder="Front-End Developer with React" name="headline" value="">
 
-                        <label for="location">Location:</label>
-                        <input type="text" id="location" placeholder="Ruse, Bulgaria" name="location" value="">
+                    <form class="form" action="" method="post">
+                        <div class="input">
+                            <input type="text" class="input-field" id="home-name" placeholder="Real House Luxury Villa..." name="name" value="" />
+                            <label class="home-name">Name:</label>
+                        </div>
+                        <div class="input">
+                            <input type="text" class="input-field" id="type" placeholder="Villa..." name="type" value="" />
+                            <label class="type">Property Type:</label>
+                        </div>
+                        <div class="input">
+                            <input type="number" class="input-field" id="year" placeholder="2018..." name="year" value="" />
+                            <label class="year">Year Built:</label>
+                        </div>
+                        <div class="input">
+                            <input type="text" class="input-field" id="city" placeholder="Sofia..." name="city" value="" />
+                            <label class="city">City</label>
+                        </div>
 
-                        <label for="company-name">Company name:</label>
-                        <input type="text" id="company-name" placeholder="Digital Solutions" name="companyName" value="">
+                        <div class="input">
+                            <input type="text" class="input-field" id="homeImage" placeholder="Image..." name="image" value="" />
+                            <label class="homeImage">Home Image:</label>
+                        </div>
 
-                        <label for="company-description">Company description:</label>
-                        <input type="text" id="company-description" placeholder="We are developing a web application" name="description" value="">
+                        <div class="input">
+                            <input type="text" class="input-field" id="description" placeholder="Description..." name="description" value="" />
+                            <label class="description">Property Description:</label>
+                        </div>
 
-                        <article class="create-page-button">
-                            <button class="btn-create">Create</button>
-                        </article>
+                        <div class="input">
+                            <input type="number" class="input-field" id="availablePieces" placeholder="1" name="pieces" value="" />
+                            <label class="availablePieces">Available pieces:</label>
+                        </div>
+
+                        <div class="create-action">
+                            <button class="create-button">Add</button>
+                        </div>
+
+
                     </form>
-
-                    <article class="create-page-image">
-                        <!-- Do not forget to change the path to the image -->
-                        <img src="/static/img/job.png" alt="image">
-                    </article>
-                </article>
-
+                </div>
             </section>
+
         </main>

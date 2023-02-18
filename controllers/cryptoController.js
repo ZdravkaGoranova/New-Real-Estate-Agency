@@ -1,7 +1,7 @@
 
 const router = require('express').Router();
 
-const Ad = require('../models/Ad.js');
+const Housing = require('../models/Housing.js');
 const User = require('../models/User.js');
 const bookServices = require('../services/bookServices.js');
 const bookUtils = require('../utils/bookUtils.js');
@@ -20,24 +20,20 @@ exports.postCreateCrypto = async (req, res) => {
     //console.log(req.user);
 
     try {
-        const { headline, location, companyName, description, usersApplied } = req.body;
+        const { name, type, year, city, image, description, pieces, rentedHome } = req.body;
 
-        let ad = new Ad({
+        let housing = new Housing({
 
-            headline,
-            location,
-            companyName,
-            description,
-            usersApplied,
-            author: req.user._id, // тук добавяте автора на рекламата
+            name, type, year, city, image, description, pieces, rentedHome,
+            owner: req.user._id, // тук добавяте автора на рекламата
         });
         // console.log(ad);
-        await ad.save();//запазва в db
+        await housing.save();//запазва в db
         //или  await cryptoService.create(req.user._id, { name, image, price, description, paymentMethod })
 
         const user = await User.findOneAndUpdate(
             { _id: req.user._id },
-            { $push: { myAds: ad._id } },
+            { $push: { rentedHome: housing._id } },
             { new: true }
         );
         // console.log(user);
@@ -70,7 +66,7 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
         return res.render('auth/404');
     }
 
-    res.render('book/details', { ad, isOwner, email, isApply});
+    res.render('book/details', { ad, isOwner, email, isApply });
 };
 
 exports.getEditCrypto = async (req, res) => {

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const Ad = require('../models/Ad.js');
+const  Housing = require('../models/Housing.js');
 const adServices = require('../services/bookServices.js');
 
 const bookUtils = require('../utils/bookUtils.js');
@@ -14,10 +14,10 @@ router.get('/', (req, res) => {
 
 router.get('/catalog', async (req, res) => {//
 
-    let jobs = await Ad.find().lean();
-    // console.log(cryptos)
+    let housings = await  Housing.find().lean();
+     console.log(housings)
     // res.render('index', { cubes, search, difficultyFrom, diffficultyTo });
-    res.render('book/catalog', { jobs });
+    res.render('book/catalog', { housings });
 
 });
 router.get('/search', async (req, res) => {

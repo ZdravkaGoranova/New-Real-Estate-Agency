@@ -2,26 +2,31 @@ const mongoose = require('mongoose');
 
 
 const userShema = new mongoose.Schema({
-    email: {
+
+    name: {
         type: String,
         // minLength: 10,
-        match: [/^[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+$/, 'Invalid URL'],
-        required: [true, 'Email is required!'],
+       match: [/^\w+\s\w+$/, 'Invalid URL'],
+        required: [true, 'name is required!'],
+    }, 
+    username: {
+        type: String,
+        // minLength: 10,
+        minLength: [5, 'username should be at least 5 characters!'],
+      
+        required: [true, 'username is required!'],
     },
     password: {
         type: String,
+        minLength: [4, 'password should be at least 4 characters!'],
         required: [true, 'Password is required!'],
-        // minLength: 5,
+       
     },
-    description: {
-        type: String,
-        required: [true, 'Description is required!'],
-        // minLength: 40,
-    },
-    myAds: [{
-        type: mongoose.Types.ObjectId,
-        ref: 'Ad',
-    }],
+    
+    // myAds: [{
+    //     type: mongoose.Types.ObjectId,
+    //     ref: 'Ad',
+    // }],
 });
 
 //userShema.virtual('confirmPassword').set;

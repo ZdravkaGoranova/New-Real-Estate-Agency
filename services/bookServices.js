@@ -1,4 +1,4 @@
-const Ad = require('../models/Ad.js');
+const Housing = require('../models/Housing.js');
 const User = require('../models/User.js');
 const bookUtils = require('../utils/bookUtils.js');
 
@@ -18,15 +18,15 @@ exports.search = async (email) => {
 
 exports.getAll = () => Book.find({}).lean();
 
-exports.create = (ownerId, cryptoData) => Ad.create({ ...cryptoData, owner: ownerId });
+exports.create = (ownerId, cryptoData) =>  Housing.create({ ...cryptoData, owner: ownerId });
 
-exports.getOne = (bookId) => Ad.findById(bookId).lean();
+exports.getOne = (bookId) =>  Housing.findById(bookId).lean();
 
-exports.update = (bookId, data) => Ad.findByIdAndUpdate(bookId, data, { runValidators: true });
+exports.update = (bookId, data) =>  Housing.findByIdAndUpdate(bookId, data, { runValidators: true });
 
-exports.delete = (bookId) => Ad.findByIdAndDelete(bookId);
+exports.delete = (bookId) =>  Housing.findByIdAndDelete(bookId);
 
-exports.getDetailsPop = (userId) => Ad.findById(userId).lean().populate({ path: 'usersApplied', select: 'email descr' });
+exports.getDetailsPop = (userId) => Housing.findById(userId).lean().populate({ path: 'usersApplied', select: 'email descr' });
 
 exports.getSearch = (email,req) => User.findOne({ email: 'email' })
     .populate('myAds')
@@ -35,7 +35,7 @@ exports.getSearch = (email,req) => User.findOne({ email: 'email' })
             console.log(err);
         } else {
             // Търсене на обяви, чиито автори имат мейл, съвпадащ с този на потребителя
-            Ad.find({ author: req.user._id }, (err, ads) => {
+            Housing.find({ author: req.user._id }, (err, ads) => {
                 if (err) {
                     console.log(err);
                 } else {
@@ -49,14 +49,14 @@ exports.getSearch = (email,req) => User.findOne({ email: 'email' })
 //await MyModel.find({ name: 'john', age: { $gte: 18 } }).exec();
 
 
-exports.getMyWishBook = (userId) => Ad.find({ wishingList: userId }).lean();
+exports.getMyWishBook = (userId) => Housing.find({ wishingList: userId }).lean();
 
-exports.getAplly = (userId) => Ad.find({ usersApplied: userId }).lean();
+exports.getAplly = (userId) => Housing.find({ usersApplied: userId }).lean();
 
 
 
 exports.apply = async (userId, bookId, req, res) => {
-    const ad = await Ad.findById(bookId);
+    const ad = await Housing.findById(bookId);
     const isOwner = ad.owner == req.user._id;
     const isApply = ad.usersApplied?.some(id => id == req.user?._id);
 
@@ -78,7 +78,7 @@ exports.apply = async (userId, bookId, req, res) => {
 
 
 exports.wish = async (userId, bookId, req, res) => {
-    const book = await Ad.findById(bookId);
+    const book = await Housing.findById(bookId);
     const isOwner = book.owner == req.user._id;
     const isWish = book.wishingList?.some(id => id == req.user?._id);
 

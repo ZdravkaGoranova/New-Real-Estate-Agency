@@ -1,36 +1,56 @@
 const mongoose = require('mongoose');
 
 const adSchema = new mongoose.Schema({
-    headline: {
+    name: {
         type: String,
-         minLength: [4, 'Headline should be at least two characters!'],
+       
         required: true,
 
     },
-    location: {
+    type: {
         type: String,
         required: true,
-         minLength: [8, 'Location should be at least two characters!'],
+        enum:{values:['Apartment”-wallet','Villa', 'House'],
+        message:'Invalid type',
+        }
 
     },
-    companyName: {
-        type: String,
-         minLength: [3, 'CompanyName should be at least two characters!'],
+    year: {
+        type: Number,
+    
         required: true,
 
     },
+    city : {
+        type: String,
+    
+        required: true,
+
+    },
+    image: {
+        type: String,
+       
+        required: true,
+
+    },
+
     description: {
         type: String,
-        minLength: [40, 'Description should be at least 40 characters!'],
+        
         required: true,
 
     },
+    pieces: {
+        type: Number,
 
-    author: {
+        required: true,
+
+    },
+    owner: {
         type: mongoose.Types.ObjectId,
         ref: 'User',
     },
-    usersApplied: [{
+    rentedHome: [{
         type: mongoose.Types.ObjectId,
         ref: 'User',
     }],
@@ -45,6 +65,6 @@ const adSchema = new mongoose.Schema({
 });
 
 
-const Ad = mongoose.model('Ad', adSchema);
+const Housing = mongoose.model('Housing', adSchema);
 
-module.exports = Ad;
+module.exports = Housing;
