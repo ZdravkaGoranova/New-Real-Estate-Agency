@@ -11,6 +11,8 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
+    console.log(username)
+    console.log( password)
     try {
         const token = await authService.login(username, password);
         console.log(token)
@@ -30,6 +32,10 @@ router.get('/register', (req, res) => {
 });
 router.post('/register', async (req, res) => {
     const { name,username, password ,repeatPassword } = req.body;
+console.log(name)
+console.log(username)
+console.log(password)
+console.log(repeatPassword)
 
     try {
         const token = await authService.register(name,username, password ,repeatPassword );

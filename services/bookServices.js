@@ -26,6 +26,9 @@ exports.update = (bookId, data) =>  Housing.findByIdAndUpdate(bookId, data, { ru
 
 exports.delete = (bookId) =>  Housing.findByIdAndDelete(bookId);
 
+exports.getOwner = (bookId) =>  Housing.findById(bookId).lean().populate({ path: 'owner', select: '_id' });
+
+
 exports.getDetailsPop = (userId) => Housing.findById(userId).lean().populate({ path: 'usersApplied', select: 'email descr' });
 
 exports.getSearch = (email,req) => User.findOne({ email: 'email' })

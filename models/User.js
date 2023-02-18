@@ -6,7 +6,7 @@ const userShema = new mongoose.Schema({
     name: {
         type: String,
         // minLength: 10,
-       match: [/^\w+\s\w+$/, 'Invalid URL'],
+      // match: [/^\w+\s\w+$/, 'Invalid URL'],
         required: [true, 'name is required!'],
     }, 
     username: {

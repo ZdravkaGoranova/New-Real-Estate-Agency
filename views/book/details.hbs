@@ -1,63 +1,46 @@
-<main>
 
-    <section id="details-page">
-        <article class="details-gage-title">
-            <h1>Details Page</h1>
-        </article>
-        <article class="details-page-card">
 
-            <article class="details-page-card-image">
-                <!-- Do not forget to change the path to the image -->
-                <img src="/static/img/man.png" alt="details-image">
-            </article>
+        <main>
+            <section id="deatils-page">
+                <div class="wrapper">
+                    <div class="product-img">
+                        <img src="{{image}}">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-text">
+                            <div class="product-text">
+                                <h1>Name: {{name}}</h1>
+                                <h2>Type: {{type}}</h2>
+                                <h4>Year: {{year}}</h4>
+                                <h4>City: {{email}}</h4>
+                                <p>Description: {{description}}</p>
 
-            <article class="details-page-card-content">
-                <p>Author: {{email}}</p>
-                <h2>Headline: {{ad.headline}}</h2>
-                <h3>Company name: {{ad.companyName}}</h3>
-                <h4>Company description: {{ad.description}}</h4>
-                <h5>Location: {{ad.location}}</h5>
+                                <!-- if there are already tenants of the housing, separate their names with a comma and a space ", "  -->
+                                <p>People rented this housing: Alex Petkov, Ivan Dobrev</p>
 
-                <article class="details-page-card-buttons">
-                    <!--only for registered users and author of the ad-->
-                    {{#if isAuthenticated}}
-                    {{#if isOwner}}
-                    <a href="/jobAds/{{ad._id}}/edit" class="btn-edit">Edit</a>
-                    <a href="/jobAds/{{ad._id}}/delete" class="btn-delete">Delete</a>
-                    {{else}}
+                                <!-- If not display: -->
+                                <p>People rented this housing: There are no tenants yet.</p>
+                            </div>
+                        </div>
 
-                    {{#if isApply}}
-                    <!--logged in user who has already applied for current ad-->
-                    <p class="already-applied">You have already applied!</p>
-                    {{else}}
-                    <!--logged in user who did not apply for current ad-->
-                    <a href="/jobAds/{{ad._id}}/apply" class="btn-apply">Apply now!</a>
-                    <p class="applied-people">Hurry up, 1 people have already applied.</p>
+                        <!-- if there is no registered user, do not display buttons-->
+                        <div class="product-btn">
+                            <!-- Only for registered user and creator of the housing offer-->
+                            {{#if isAuthenticated}}
+                            {{#if isOwner}}
+                            <a href="/agencys/{{ad._id}}/edit" class="edit">Edit</a>
+                            <a href="/agencys/{{ad._id}}/delete" class="remove">Delete</a>
+                            {{else}}
+                            <!-- logged in user with available pieces-->
+                            <a href="#" class="rentHome">Rent a home, available 2 housing</a>
+                            <p class="alRentHome">You have already rent this home</p>
 
-                    {{/if}}
-                    {{/if}}
-                    {{/if}}
-                </article>
-            </article>
+                            <!-- logged in user with no available pieces-->
+                           
+                            {{/if}} <p class="no-housing">No Housing Available!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
 
-        </article>
-    </section>
-
-    <!--This section should only be visible to the author of the current ad-->
-    {{#if isOwner}}
-
-    {{#if ad.usersApplied}}
-    <section id="info-about-candidates">
-        <h2>Candidates for this ad:</h2>
-        <!\--If there are people who have applied, show each of them in the following format--\>
-            {{#each ad.usersApplied}}
-            <article class="info-about-candidates-card">
-                <h2>Email: {{email}}</h2>
-                <h3>Description of the candidate's skills: {{description}}</h3>
-            </article>
-            {{/each}}
-            {{/if}}
-            <!\--If not, you don't need to visualize anything further-\->
-    </section>
-    {{/if}}
-</main>

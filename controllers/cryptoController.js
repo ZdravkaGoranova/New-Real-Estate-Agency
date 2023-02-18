@@ -48,25 +48,31 @@ exports.postCreateCrypto = async (req, res) => {
 
 exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req,res)=>{)
 
-    const ad = await bookServices.getDetailsPop(req.params.jobId);
+    // const housingId = req.params.jobId;
+    // console.log(housingId)
 
-    let user = await User.findOne({ _id: ad.author }).exec();
-    const email = user ? user.email : '';
-    //console.log(email)
+    //  const housing = await bookServices.getOwner(housingId);
+    //  console.log(housing.owner)
+    //  console.log(req.user._id)
 
-    const isOwner = bookUtils.isOwner(req.user, ad);//const isOwner = crypto.owner==req.user._id;
-    // console.log(isOwner)
-
-    const isApply = ad.usersApplied?.some(id => id == req.user?._id);
-    //console.log(isApply)
-
-    //crypto.paymentMethod = paymentMethodsMap[crypto.paymentMethod]
-
-    if (!ad) {
-        return res.render('auth/404');
-    }
-
-    res.render('book/details', { ad, isOwner, email, isApply });
+     const publication = await bookServices.getOne(req.params.jobId);
+     const userId = publication.author.toString()
+     const userData =await bookServices.getAdress(userId)
+ 
+     console.log(publication.author.toString())
+     //console.log(userData.username)
+ 
+     const isOwner = bookUtils.isOwner(req.user, publication);//const isOwner = crypto.owner==req.user._id;
+     //console.log(isOwner)
+ 
+     const isWished = publication.usersShared?.some(id => id == req.user?._id);
+     //console.log(isWished)
+     //crypto.paymentMethod = paymentMethodsMap[crypto.paymentMethod]
+ 
+     if (!publication) {
+         return res.render('home/404');
+     }
+    res.render('book/details', {});
 };
 
 exports.getEditCrypto = async (req, res) => {

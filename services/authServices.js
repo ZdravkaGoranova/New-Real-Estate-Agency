@@ -36,7 +36,7 @@ exports.register = async (name, username, password, repeatPassword) => {
 
     const hashPassword = await bcrypt.hash(password, 10);
 
-    await User.create({ username, password: hashPassword, name});
+    await User.create({ username, password: hashPassword});
 
     return this.login(username, password);
 };
@@ -46,7 +46,7 @@ exports.login = async (username, password) => {
 
      //Email/User exist
      const user = await this.findByUsername(username);
-     console.log(user)
+    // console.log(user)
      if (!user) {
          throw new Error('Invalid email or password!');
      }
